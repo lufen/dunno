@@ -1,0 +1,23 @@
+body{
+	margin: 50px;
+	padding-left: 50px;
+	border-style:solid;
+	border-width: 1px;
+}
+
+#content{
+	clear: both; /*don't let any other div float up, force below */
+}
+
+#footer{
+	clear: both; /*don't let any other div float up, force below */
+}
+
+#sidebar{
+	clear: both; /*don't let any other div float up, force below */
+}
+
+#logo{
+	padding-top: 10px;
+	clear: both; /*don't let any other div float up, force below */
+}
