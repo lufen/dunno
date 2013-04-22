@@ -9,10 +9,9 @@
 			$fromUser = convertPlainTextToEncrypted($password,$row['id']);
 			if($row['password'] == convertPlainTextToEncrypted($password,$row['id'])){
 				$_SESSION['id'] = $row['id'];
-				$_SESSION['userLevel'] = $row['userLevel'];
-				header( 'Location: mypage.php' );
+				echo json_encode (array ('ok'=>'OK'));
 			} else{
-				return NULL;
+				echo json_encode (array ('message'=>$fromUser));
 			}
 		}
 	}
@@ -24,47 +23,37 @@ function convertPlainTextToEncrypted($password,$uid){
 	return $hash;
 }
 
-function registerUser($db,$name, $streetAdress,$postCode,$country, $email, $password){
+function registerUser($email, $password){
+	require "db.php";
 	require_once 'sessionStart.php';
 	$db->beginTransaction();
 	$db->query('LOCK TABLES users WRITE');
 	// Add user, then read back and update it with the encrypted one.
-	$sql = 'INSERT INTO users (name, streetAdress,postCode,country, email, password, blacklisted, userLevel)VALUES (:name, :streetAdress,:postCode,:country, :email, :password, :blacklisted, :userLevel)';
+	$sql = 'INSERT INTO users (email, password)VALUES (:email, :password)';
 	$sth = $db->prepare ($sql);
-	$blacklisted = 0;
-	$userLevel = 0;
-	$sth->bindValue (':name', $name);
-	$sth->bindValue (':streetAdress', $streetAdress);
-	$sth->bindValue (':postCode', $postCode);
-	$sth->bindValue (':country', $country);
 	$sth->bindValue (':email', $email);
 	$sth->bindValue (':password',"hei");
-	$sth->bindValue (':blacklisted', $blacklisted);
-	$sth->bindValue (':userLevel', $userLevel);
 	$sth->execute ();
 	if($sth->rowCount() == 0){
-	 // In case of error, rollback
-	 $db->rollBack();                     
-	 $db->query ('UNLOCK TABLES'); 
-	 throw new Exception('email not unique');
+		// In case of error, rollback
+		$db->rollBack();                     
+		$db->query ('UNLOCK TABLES'); 
+		echo json_encode (array ('message'=>'Email not unique'));
 	}
 	$uid = $db->lastInsertId();
-	echo "<p>OK<br>";
 	// Update users password to an encrypted one
 	$sql = 'update users set password = :password where id = :id';
 	$sth = $db->prepare ($sql);
-	$sth->bindValue (':password',convertPlainTextToEncrypted($_POST['Password'],$uid));
+	$sth->bindValue (':password',convertPlainTextToEncrypted($password,$uid));
 	$sth->bindValue (':id',$uid);
 	$sth->execute ();
 	if ($sth->rowCount()==0) {                      
-	 $db->rollBack();                      
-	 $db->query('UNLOCK TABLES');
-	 throw new Exception('Unable to set new password');  
+		$db->rollBack();                      
+		$db->query('UNLOCK TABLES');
+		echo json_encode (array ('message'=>'Error happened'));
 	}
 	$db->commit();
-	// new user created, then log him in
-	$_SESSION['id'] = $uid;
-	$_SESSION['userLevel'] =  $userLevel;
+	echo json_encode (array ('ok'=>'OK'));
 }
 
 // Check if user logged in, if not then redirect to login page.
