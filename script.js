@@ -81,7 +81,7 @@ function AmILoggedIn() {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
 				$('#LoginMenu').load('topMenuLoggedIn.html');
-				$('#Main').load('main.html');
+				$('#Main').load('loggedInMain.html');
 			} else {
 				$('#LoginMenu').load('topMenuUNloggedin.html');
 			}
@@ -113,7 +113,15 @@ function openPage(id) {
 			$.each(jsonData, function (index, value) {
 			$('#Main').append('<div id=elem>'+value["content"]+'</div>');
 			});
-			
+			$.ajax({
+				url: 'getTitle.php',
+				type: 'get',
+				data: {'id': id},
+				success: function (tmp) {
+					data = eval ('('+tmp+')');
+					document.title = data.title;
+				}
+			});
 		}
 	});
 };
