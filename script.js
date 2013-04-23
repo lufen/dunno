@@ -41,7 +41,7 @@ function newUser (form) {
 			}
 		}
 	});
-}
+};
 
 function login(form) {
 	$.ajax({
@@ -51,7 +51,7 @@ function login(form) {
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
-				$('#Main').load('main.html');
+				$('#Main').load('loggedInMain.html');
 				$('#LoginMenu').load('topMenuLoggedIn.html');
 				getMYPages();
 			} else {
@@ -138,7 +138,7 @@ function addPage(form) {
 function OpenaddPageDialog () {
 	// Show the new user dialog.	
 	$('#Main').load('AddNewPage.html');
-}
+};
 
 
 

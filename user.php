@@ -12,8 +12,10 @@
 				$_SESSION['id'] = $row['id'];
 				echo json_encode (array ('ok'=>'OK'));
 			} else{
-				echo json_encode (array ('message'=>'Failed to log in'));
+				echo json_encode (array ('message'=>'Wrong username/password'));
 			}
+		}else{
+			echo json_encode (array ('message'=>'Wrong username/password'));
 		}
 	}
 
