@@ -64,7 +64,6 @@ function logout() {
 	});
 };
 
-
 function AmILoggedIn() {
 	$.ajax({
 		url: 'isLoggedIn.php',
@@ -79,3 +78,59 @@ function AmILoggedIn() {
 		}
 	});
 };
+
+function getMYPages() {
+	$.ajax({
+		url: 'getMyPages.php',
+		success: function (tmp) {
+			$('#sidebar').html('<P> Sidebar: </P>');
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$('#sidebar').append('<a href="javascript:openPage('+value["id"].toString()+')">'+value["title"]+'</a><br/>');
+			});
+		}
+	});
+};
+
+function openPage(id) {
+	$.ajax({
+		url: 'openPage.php',
+		type: 'get',
+		data: {'id': id},
+		success: function (tmp) {
+			$('#Main').html('<P> Main: </P>');
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+			$('#Main').append('<div id=elem>'+value["content"]+'</div>');
+			});
+			
+		}
+	});
+};
+
+
+function addPage(form) {
+	$.ajax({
+		url: 'AddPage.php',
+		type: 'get',
+		data: {'title': form.title.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				getMYPages();
+			} else {
+				alert (data.message);
+			}
+			
+		}
+	});
+};
+
+
+function OpenaddPageDialog () {
+	// Show the new user dialog.	
+	$('#Main').load('AddNewPage.html');
+}
+
+
+

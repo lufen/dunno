@@ -2,8 +2,7 @@ Krav til systemet (må være med)
 
 Offentlige sider skal hvem som helst kunne lese
 Navigasjon i en sidestruktur (dere velger selv menyform, men poenget er at dere unngår page refresh, dvs bytt ut innhold i menyen og på siden dynamisk uten å laste hele siden på nytt.)
-Mulighet for å opprette brukere, redigere brukerdata
-Logge på
+redigere brukerdata
 Rettigheter skal kunne styres slik at noen sider er personlige (kun synlig for den som laget siden når denne er pålogget.)
 Pålogget bruker skal kunne opprette nye sider
 Pålogget bruker skal kunne lage nye elementer på "sine sider."
