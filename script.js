@@ -44,9 +44,37 @@ function login(form) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
 				$('#Main').load('main.html');
-				$('#LoginMenu').html('Hei');
+				$('#LoginMenu').load('topMenuLoggedIn.html');
 			} else {
 				alert (data.message);
+			}
+		}
+	});
+};
+
+function logout() {
+	$.ajax({
+		url: 'logout.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				$('#LoginMenu').load('topMenuUNloggedin.html');
+			}
+		}
+	});
+};
+
+
+function AmILoggedIn() {
+	$.ajax({
+		url: 'isLoggedIn.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				$('#LoginMenu').load('topMenuLoggedIn.html');
+				$('#Main').load('main.html');
+			} else {
+				$('#LoginMenu').load('topMenuUNloggedin.html');
 			}
 		}
 	});

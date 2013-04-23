@@ -1,5 +1,6 @@
 <?php
 	function login ($email,$password) {
+		require_once 'sessionStart.php';
 		require "db.php";
 		$sql = 'SELECT * FROM users WHERE email=:email';
 		$sth = $db->prepare ($sql);
@@ -11,7 +12,7 @@
 				$_SESSION['id'] = $row['id'];
 				echo json_encode (array ('ok'=>'OK'));
 			} else{
-				echo json_encode (array ('message'=>$fromUser));
+				echo json_encode (array ('message'=>'Failed to log in'));
 			}
 		}
 	}
