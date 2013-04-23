@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="content">
 	<?php
 	require 'user.php';
@@ -30,3 +31,7 @@
 		</p>
 	</form>
 
+<?php
+	require 'user.php';
+	login($_GET['email'],$_GET['password']);
+?>
