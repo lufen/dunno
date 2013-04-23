@@ -7,6 +7,14 @@ function loginDialog () {
 	$('#Main').load('login.html');
 }
 
+function LoadDefaultMainPage () {
+	// Show the new user dialog.	
+	$('#Main').load('main.html');
+	$('#sidebar').html('<P> Sidebar: </P>');
+}
+
+
+
 function newUser (form) {
  if (form.password1.value!=form.password.value) {
 		alert ("Passwords has to match");
@@ -24,7 +32,7 @@ function newUser (form) {
 					type: 'get',
 					data: {'email': form.email.value, 'password': form.password.value},
 					success: function (tmp) {
-						$('#Main').load('main.html');
+						$('#Main').load('loggedInMain.html');
 						$('#LoginMenu').html('Hei');
 					}
 				});
@@ -45,6 +53,7 @@ function login(form) {
 			if (data.ok == 'OK') {
 				$('#Main').load('main.html');
 				$('#LoginMenu').load('topMenuLoggedIn.html');
+				getMYPages();
 			} else {
 				alert (data.message);
 			}
@@ -59,6 +68,7 @@ function logout() {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
 				$('#LoginMenu').load('topMenuUNloggedin.html');
+				LoadDefaultMainPage();
 			}
 		}
 	});
@@ -108,7 +118,6 @@ function openPage(id) {
 	});
 };
 
-
 function addPage(form) {
 	$.ajax({
 		url: 'AddPage.php',
@@ -125,7 +134,6 @@ function addPage(form) {
 		}
 	});
 };
-
 
 function OpenaddPageDialog () {
 	// Show the new user dialog.	
