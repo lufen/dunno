@@ -5,19 +5,93 @@ body{
 	border-width: 1px;
 }
 
-#content{
-	clear: both; /*don't let any other div float up, force below */
+#Main{
+	float: left;
+	border-radius: 10px;
+	width: 82%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
 }
 
-#footer{
-	clear: both; /*don't let any other div float up, force below */
+#elem{
+	float: left;
+	border-radius: 10px;
+	width: 84%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 50px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
+}
+
+#logo{
+	clear: both;
+	float: left;
+	border-radius: 10px;
+	width:100%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
+}
+
+#LoginMenu{
+	clear: both;
+	float: left;
+	border-radius: 10px;
+	width:100%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
+}
+
+#EditMenu{
+	clear: both;
+	float: left;
+	border-radius: 10px;
+	width:100%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
 }
 
 #sidebar{
 	clear: both; /*don't let any other div float up, force below */
-}
-
-#logo{
+	float: left;
+	border-radius: 10px;
+	width: 15%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
 	padding-top: 10px;
-	clear: both; /*don't let any other div float up, force below */
+	padding-bottom: 10px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
 }

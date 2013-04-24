@@ -10,10 +10,23 @@ function loginDialog () {
 function LoadDefaultMainPage () {
 	// Show the new user dialog.	
 	$('#Main').load('main.html');
+	$('#EditMenu').hide();
 	$('#sidebar').html('<P> Sidebar: </P>');
 }
 
+function LoadLoggedInMainPage () {
+	// Show the new user dialog.	
+	$('#Main').load('loggedInMain.html');
+	$('#LoginMenu').load('topMenuLoggedIn.html');
+	$('#EditMenu').hide();
+	getMYPages();
+	document.title = "Web page making system";
+}
 
+function LoadEditMenu(){
+	$('#EditMenu').load('editMenu.html');
+	$('#EditMenu').show();
+}
 
 function newUser (form) {
  if (form.password1.value!=form.password.value) {
@@ -93,7 +106,7 @@ function getMYPages() {
 	$.ajax({
 		url: 'getMyPages.php',
 		success: function (tmp) {
-			$('#sidebar').html('<P> Sidebar: </P>');
+			$('#sidebar').html('<P> My pages: </P>');
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
 				$('#sidebar').append('<a href="javascript:openPage('+value["id"].toString()+')">'+value["title"]+'</a><br/>');
@@ -113,6 +126,7 @@ function openPage(id) {
 			$.each(jsonData, function (index, value) {
 			$('#Main').append('<div id=elem>'+value["content"]+'</div>');
 			});
+			LoadEditMenu();
 			$.ajax({
 				url: 'getTitle.php',
 				type: 'get',
@@ -143,9 +157,31 @@ function addPage(form) {
 	});
 };
 
+function addElement(form) {
+	$.ajax({
+		url: 'AddElement.php',
+		type: 'get',
+		data: {'text': form.text.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				openPage(data.id);
+			} else {
+				alert (data.message);
+			}
+			
+		}
+	});
+};
+
 function OpenaddPageDialog () {
-	// Show the new user dialog.	
+	// Show the new page dialog.	
 	$('#Main').load('AddNewPage.html');
+};
+
+function OpenAddElementDialog () {
+	// Show the new element dialog.	
+	$('#Main').load('addNewTextElement.html');
 };
 
 
