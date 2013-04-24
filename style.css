@@ -66,6 +66,21 @@ body{
 	border-color: #FF2400;
 }
 
+#PublicMenu{
+	clear: both;
+	float: left;
+	border-radius: 10px;
+	width:100%;
+	background-color: #ffffff;
+	opacity: .8;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-style:solid;
+	border-width:1px;
+	border-color: #FF2400;
+}
+
 #EditMenu{
 	clear: both;
 	float: left;
@@ -74,8 +89,8 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-style:solid;
 	border-width:1px;
 	border-color: #FF2400;

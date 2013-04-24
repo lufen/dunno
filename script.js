@@ -7,11 +7,44 @@ function loginDialog () {
 	$('#Main').load('login.html');
 }
 
+function LoadpublicMenu () {
+	
+	$.ajax({
+	url: 'getPublicPages.php',
+	success: function (tmp) {
+		var jsonData = jQuery.parseJSON(tmp);
+		$.each(jsonData, function (index, value) {
+			$("#page").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
+		});
+	}
+});
+	$('#PublicMenu').load('publicPages.html');
+	$("#PublicMenu").hide().fadeIn('fast');
+}
+
+function AmILoggedIn() {
+	$.ajax({
+		url: 'isLoggedIn.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				LoadLoggedInMainPage();
+			} else {
+				LoadDefaultMainPage();
+			}
+		}
+	});
+};
+
 function LoadDefaultMainPage () {
 	// Show the new user dialog.	
 	$('#Main').load('main.html');
 	$('#EditMenu').hide();
-	$('#sidebar').html('<P> Sidebar: </P>');
+	$('#sidebar').html('<P> My pages: </P>');
+	$('#LoginMenu').load('topMenuUNloggedin.html');
+	LoadpublicMenu();
+	document.title = "Web page making system";
+	 
 }
 
 function LoadLoggedInMainPage () {
@@ -20,9 +53,13 @@ function LoadLoggedInMainPage () {
 	$('#LoginMenu').load('topMenuLoggedIn.html');
 	$('#EditMenu').hide();
 	getMYPages();
+	LoadpublicMenu();
 	document.title = "Web page making system";
 }
 
+function hideEditMenu(){
+	$('#EditMenu').hide();
+}
 function LoadEditMenu(){
 	$('#EditMenu').load('editMenu.html');
 	$('#EditMenu').show();
@@ -87,20 +124,7 @@ function logout() {
 	});
 };
 
-function AmILoggedIn() {
-	$.ajax({
-		url: 'isLoggedIn.php',
-		success: function (tmp) {
-			data = eval ('('+tmp+')');
-			if (data.ok == 'OK') {
-				$('#LoginMenu').load('topMenuLoggedIn.html');
-				$('#Main').load('loggedInMain.html');
-			} else {
-				$('#LoginMenu').load('topMenuUNloggedin.html');
-			}
-		}
-	});
-};
+
 
 function getMYPages() {
 	$.ajax({
@@ -131,6 +155,31 @@ function openPage(id) {
 				url: 'getTitle.php',
 				type: 'get',
 				data: {'id': id},
+				success: function (tmp) {
+					data = eval ('('+tmp+')');
+					document.title = data.title;
+				}
+			});
+		}
+	});
+};
+
+function openPublicPage(form) {
+	$.ajax({
+		url: 'openPublicPage.php',
+		type: 'get',
+		data: {'id': form.page.value},
+		success: function (tmp) {
+			hideEditMenu();
+			$('#Main').html('<P> Main: </P>');
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$('#Main').append('<div id=elem>'+value["content"]+'</div>');
+			});
+			$.ajax({
+				url: 'getTitle.php',
+				type: 'get',
+				data: {'id': form.page.value},
 				success: function (tmp) {
 					data = eval ('('+tmp+')');
 					document.title = data.title;
