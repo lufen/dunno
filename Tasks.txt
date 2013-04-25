@@ -1,6 +1,6 @@
 Krav til systemet (må være med)
 
-redigere brukerdata
+Redigere brukerdata
 Pålogget bruker skal kunne lage nye elementer på "sine sider."
 Elementene på siden må kunne sorteres uavhengig av når de blir laget
 	Dvs at dere må finne en måte å la brukeren anngi hvordan disse skal sorteres

@@ -99,8 +99,7 @@ function newUser (form) {
 					type: 'get',
 					data: {'email': form.email.value, 'password': form.password.value},
 					success: function (tmp) {
-						$('#Main').load('loggedInMain.html');
-						$('#LoginMenu').html('Hei');
+						LoadLoggedInMainPage();
 					}
 				});
 			} else {
@@ -118,9 +117,7 @@ function login(form) {
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
-				$('#Main').load('loggedInMain.html');
-				$('#LoginMenu').load('topMenuLoggedIn.html');
-				getMYPages();
+				LoadLoggedInMainPage();
 			} else {
 				alert (data.message);
 			}
