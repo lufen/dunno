@@ -8,9 +8,10 @@ function loginDialog () {
 }
 
 function LoadpublicMenu () {
-	
+	$('#PublicMenu').hide();
 	$.ajax({
 	url: 'getPublicPages.php',
+	cache: 'false',
 	success: function (tmp) {
 		var jsonData = jQuery.parseJSON(tmp);
 		$.each(jsonData, function (index, value) {
@@ -19,7 +20,7 @@ function LoadpublicMenu () {
 	}
 });
 	$('#PublicMenu').load('publicPages.html');
-	$("#PublicMenu").hide().fadeIn('fast');
+	$("#PublicMenu").show();
 }
 
 function AmILoggedIn() {
@@ -62,6 +63,22 @@ function hideEditMenu(){
 }
 function LoadEditMenu(){
 	$('#EditMenu').load('editMenu.html');
+	$.ajax({
+		url: 'getPagePrivateStatus.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.pub == 'yes') {
+				$.get('AddSetPrivateButton.html', function(data) {
+    				$("#EditMenu").append(data);
+				});;
+			}else{
+				$.get('AddSetPublicButton.html', function(data) {
+    				$("#EditMenu").append(data);
+				});;
+			}
+		}
+	});
+
 	$('#EditMenu').show();
 }
 
@@ -198,10 +215,42 @@ function addPage(form) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
 				getMYPages();
+				LoadEditMenu();
 			} else {
 				alert (data.message);
 			}
-			
+		}
+	});
+};
+
+function setPrivate() {
+	$.ajax({
+		url: 'setPrivate.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				alert ("Page is now setPrivate");
+				LoadpublicMenu();
+				LoadEditMenu();
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+};
+
+function setPublic() {
+	$.ajax({
+		url: 'setPublic.php',
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				alert ("Page is now public");
+				LoadpublicMenu();
+				LoadEditMenu();
+			} else {
+				alert (data.message);
+			}
 		}
 	});
 };
