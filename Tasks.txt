@@ -1,17 +1,13 @@
 Krav til systemet (må være med)
 
-Offentlige sider skal hvem som helst kunne lese
-Navigasjon i en sidestruktur (dere velger selv menyform, men poenget er at dere unngår page refresh, dvs bytt ut innhold i menyen og på siden dynamisk uten å laste hele siden på nytt.)
 redigere brukerdata
-Rettigheter skal kunne styres slik at noen sider er personlige (kun synlig for den som laget siden når denne er pålogget.)
-Pålogget bruker skal kunne opprette nye sider
 Pålogget bruker skal kunne lage nye elementer på "sine sider."
 Elementene på siden må kunne sorteres uavhengig av når de blir laget
-Dvs at dere må finne en måte å la brukeren anngi hvordan disse skal sorteres
+	Dvs at dere må finne en måte å la brukeren anngi hvordan disse skal sorteres
 Lag en mulighet til å sette inn alternativt innhold via en iframe, innholdet i denne iframen kan komme fra en fil i filsystemet i systemet eller en ekstern URL..
-Benytt filsystemet fra siste forelesning i kurset (eller tilsvarende) for å la brukerne lagre filer som skal publiseres.
-Kan være med (dette er bare forslag, det er helt sikkert masse annet morsomt som kan legges inn her)
+	Benytt filsystemet fra siste forelesning i kurset (eller tilsvarende) for å la brukerne lagre filer som skal publiseres.
 
+Kan være med (dette er bare forslag, det er helt sikkert masse annet morsomt som kan legges inn her)
 Styr rettigheter med grupper (rettighetsstyring kan gjøres til et prosjekt i seg selv.)
 En spesiell gruppe, administrator har mulighet for å opprette grupper og legge personer inn i gruppene
 Gruppene tildeles så rettigheter til å redigere de ulike sidene og til å opprette nye undersider
