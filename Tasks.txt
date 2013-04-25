@@ -20,4 +20,3 @@ Gi mulighet for å sette inn bilder fra en katalog i filsystemet til CMS'et som e
 Gi mulighet for å bruke alternative stilsett på ulike sider
 Når nye sider opprettes så arves rettigheter og stilsett fra siden den blir opprettet ut i fra
 Ha mulighet for ulike typer menyer på ulike sider
-Ta kontakt for å diskutere ville ideer.

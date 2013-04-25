@@ -272,6 +272,7 @@ function addElement(form) {
 function OpenaddPageDialog () {
 	// Show the new page dialog.	
 	$('#Main').load('AddNewPage.html');
+	hideEditMenu();
 };
 
 function OpenAddElementDialog () {
