@@ -39,25 +39,33 @@ $(document).ready(function(){
 	</div>
 
 	<div id="login-form" title="Login" style="display:none;" >
-  	<form onsubmit="return false;">
-	Email<br/>
-	<input type="text" title="email" name="email"><br/>
-	Password<br/>
-	<input type="password" name="password"><br/>
-	<input type="button" value="Login" onclick="javascript:login(this.form)"/>
-	</form>
+	  	<form onsubmit="return false;">
+		Email<br/>
+		<input type="text" title="email" name="email"><br/>
+		Password<br/>
+		<input type="password" name="password"><br/>
+		<input type="button" value="Login" onclick="javascript:login(this.form)"/>
+		</form>
 	</div>
 
-	<div id="register-form" title="Regiter" style="display:none;">
-	<form onsubmit="return false;">
-	Email<br/>
-	<input type="text" name="email" title="Email"/><br/>
-	Password<br/>
-	<input type="password" name="password"/><br/>
-	Confirm password<br/>
-	<input type="password" name="password1"/><br/>
-	<input type="button" value="Register" onclick="javascript:newUser(this.form);"/>
-	</form>
+	<div id="register-form" title="Register" style="display:none;">
+		<form onsubmit="return false;">
+		Email<br/>
+		<input type="text" name="email" title="Email"/><br/>
+		Password<br/>
+		<input type="password" name="password"/><br/>
+		Confirm password<br/>
+		<input type="password" name="password1"/><br/>
+		<input type="button" value="Register" onclick="javascript:newUser(this.form);"/>
+		</form>
+	</div>
+
+	<div id="addPage-form" title="Add a new page" style="display:none;">
+		<form onsubmit="return false;">
+		Title<br/>
+		<input type="text" name="title" title="title"/><br/>
+		<input type="button" value="Add" onclick="javascript:addPage(this.form);"/>
+		</form>
 	</div>
 
 	<div id="EditMenu">

@@ -16,7 +16,7 @@ function newUserDialog () {
 	}).dialog("open");
 }
 function loginDialog () {
-	// Show the new user dialog.
+	// Show the login dialog.
    $("#login-form").dialog({
 		autoOpen: false,
 		height: 350,
@@ -166,8 +166,6 @@ function logout() {
 	});
 };
 
-
-
 function getMYPages() {
 	$.ajax({
 		url: 'getMyPages.php',
@@ -188,7 +186,7 @@ function openPage(id) {
 		type: 'get',
 		data: {'id': id},
 		success: function (tmp) {
-			$('#Main').html('<P> Main: </P>');
+			$('#Main').html('');
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
 			$('#Main').append('<div id=elem>'+value["content"]+'</div>');
@@ -247,6 +245,7 @@ function addPage(form) {
 			}
 		}
 	});
+	$("#addPage-form").dialog("close");
 };
 
 function setPrivate() {
@@ -300,8 +299,20 @@ function addElement(form) {
 
 function OpenaddPageDialog () {
 	// Show the new page dialog.	
-	$('#Main').load('AddNewPage.html');
-	hideEditMenu();
+   $("#addPage-form").dialog({
+	autoOpen: false,
+	height: 350,
+	width: 350,
+	modal: true,
+	buttons: [
+		{
+			text: "Close",
+			click: function() {
+			$( this ).dialog( "close" );
+			}
+		}
+	]
+  }).dialog("open");
 };
 
 function OpenAddElementDialog () {
