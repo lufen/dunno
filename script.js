@@ -41,7 +41,7 @@ function LoadDefaultMainPage () {
 	// Show the new user dialog.	
 	$('#Main').load('main.html');
 	$('#EditMenu').hide();
-	$('#sidebar').html('<P> My pages: </P>');
+	$('#sidebar').hide();
 	$('#LoginMenu').load('topMenuUNloggedin.html');
 	LoadpublicMenu();
 	document.title = "Web page making system";
@@ -59,6 +59,7 @@ function LoadLoggedInMainPage () {
 }
 
 function hideEditMenu(){
+	// Hide edit menu, for those pages you can not edit.
 	$('#EditMenu').hide();
 }
 function LoadEditMenu(){
@@ -78,7 +79,6 @@ function LoadEditMenu(){
 			}
 		}
 	});
-
 	$('#EditMenu').show();
 }
 
@@ -151,6 +151,7 @@ function getMYPages() {
 			});
 		}
 	});
+	$('#sidebar').show();
 };
 
 function openPage(id) {
