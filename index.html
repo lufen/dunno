@@ -16,15 +16,13 @@ $(document).ready (function() {
 <script type="text/javascript">
 // Add a spinner animation for when page is loading
 $(document).ready(function(){
-    $("#spinner").bind("ajaxSend", function() {
-        $(this).show();
-    }).bind("ajaxStop", function() {
-        $(this).hide();
-    }).bind("ajaxError", function() {
-        $(this).hide();
-    });
- 
-     });
+	.ajaxStart(function(){
+		$("#spinner").show();
+	})
+	.ajaxStop(function(){
+		$("#spinner").hide();
+	});
+ });
 </script>
 	<div id="logo">
 		<img src="logo.png" alt="logo">
@@ -35,6 +33,7 @@ $(document).ready(function(){
 	<div id="spinner" class="spinner" style="display:none;">
     	<img id="img-spinner" src="spinner.gif" alt="Loading"/>
 	</div>
+
 	<div id="LoginMenu">
 		<P> LoginMenu </P>
 	</div>
