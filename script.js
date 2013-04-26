@@ -1,10 +1,36 @@
 function newUserDialog () {
 	// Show the new user dialog.	
-	$('#Main').load('newUser.html');
+	$("#register-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+	}).dialog("open");
 }
 function loginDialog () {
-	// Show the new user dialog.	
-	$('#Main').load('login.html');
+	// Show the new user dialog.
+   $("#login-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
 }
 
 function LoadpublicMenu () {
@@ -38,14 +64,14 @@ function AmILoggedIn() {
 };
 
 function LoadDefaultMainPage () {
-	// Show the new user dialog.	
+	// Show the new user dialog.
+	$('#userInt').hide();	
 	$('#Main').load('main.html');
 	$('#EditMenu').hide();
 	$('#sidebar').hide();
 	$('#LoginMenu').load('topMenuUNloggedin.html');
 	LoadpublicMenu();
 	document.title = "Web page making system";
-	 
 }
 
 function LoadLoggedInMainPage () {
@@ -107,6 +133,7 @@ function newUser (form) {
 			}
 		}
 	});
+	$("#register-form").dialog("close");
 };
 
 function login(form) {
@@ -123,6 +150,7 @@ function login(form) {
 			}
 		}
 	});
+	$("#login-form").dialog("close");
 };
 
 function logout() {
