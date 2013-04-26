@@ -321,10 +321,10 @@ function OpenAddElementDialog () {
 		url: 'addNewTextElement.html',
 		success: function (data) {
 			$('#Main').html(data);
-			$('#text').tinymce({
+			tinymce.init({
 				language : 'en', 
-				// Location of TinyMCE script
-				script_url : 'tiny_mce/tiny_mce_gzip.php',
+			    selector: "textarea",
+    			theme: "modern",
 
 				// General options
 				theme : "advanced",
