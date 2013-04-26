@@ -16,10 +16,10 @@ $(document).ready (function() {
 <script type="text/javascript">
 // Add a spinner animation for when page is loading
 $(document).ready(function(){
-	.ajaxStart(function(){
+	$(document).ajaxStart(function(){
 		$("#spinner").show();
 	})
-	.ajaxStop(function(){
+	$(document).ajaxStop(function(){
 		$("#spinner").hide();
 	});
  });
