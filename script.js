@@ -327,10 +327,10 @@ function OpenAddElementDialog () {
     			theme: "modern",
 
 				// General options
-				plugins :"pagebreak,layer,table,save,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,visualchars,nonbreaking,advlist,spellchecker",
+				plugins :"pagebreak,layer,table,save,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,visualchars,nonbreaking,advlist,spellchecker",
 
 				// Theme options
-				theme_advanced_buttons1 : "spellchecker,iespell,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,forecolor,backcolor",
+				theme_advanced_buttons1 : "spellchecker,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,forecolor,backcolor",
 				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,cleanup,removeformat,help,code,|,visualchars,nonbreaking,visualaid,|,insertdate,inserttime",
 				theme_advanced_buttons3 : "tablecontrols,|,sub,sup,|,charmap,|,print,|,fullscreen,|,cite,abbr,acronym,del,ins",
 				theme_advanced_toolbar_location : "top",
