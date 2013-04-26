@@ -284,7 +284,7 @@ function addElement(form) {
 	$.ajax({
 		url: 'AddElement.php',
 		type: 'get',
-		data: {'text': form.text.value},
+		data: {'text': tinyMCE.activeEditor.getContent()},
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
@@ -327,12 +327,12 @@ function OpenAddElementDialog () {
     			theme: "modern",
 
 				// General options
-				plugins :"pagebreak,layer,table,save,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,visualchars,nonbreaking,advlist,spellchecker",
+				plugins :"pagebreak,layer,table,save,insertdatetime,preview,searchreplace,contextmenu,paste,fullscreen,noneditable,visualchars,nonbreaking",
 
 				// Theme options
-				theme_advanced_buttons1 : "spellchecker,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,forecolor,backcolor",
+				theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,forecolor,backcolor",
 				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,cleanup,removeformat,help,code,|,visualchars,nonbreaking,visualaid,|,insertdate,inserttime",
-				theme_advanced_buttons3 : "tablecontrols,|,sub,sup,|,charmap,|,print,|,fullscreen,|,cite,abbr,acronym,del,ins",
+				theme_advanced_buttons3 : "tablecontrols,|,sub,sup,|,charmap,|,fullscreen,|,cite,abbr,acronym,del,ins",
 				theme_advanced_toolbar_location : "top",
 				theme_advanced_toolbar_align : "left",
 				theme_advanced_statusbar_location : "bottom",
@@ -342,7 +342,6 @@ function OpenAddElementDialog () {
 			});
 		}
 	});
-	//$('#Main').load('addNewTextElement.html');
 };
 
 
