@@ -1,9 +1,8 @@
 Krav til systemet (må være med)
 
-Redigere brukerdata
-Pålogget bruker skal kunne lage nye elementer på "sine sider."
-Elementene på siden må kunne sorteres uavhengig av når de blir laget
-	Dvs at dere må finne en måte å la brukeren anngi hvordan disse skal sorteres
+Redigere brukerdata <-- Harald
+Pålogget bruker skal kunne lage nye elementer på "sine sider." <-- Somewhat done, kan lage tekst elementer
+Elementene på siden må kunne sorteres uavhengig av når de blir laget <-- Somewhat done
 Lag en mulighet til å sette inn alternativt innhold via en iframe, innholdet i denne iframen kan komme fra en fil i filsystemet i systemet eller en ekstern URL..
 	Benytt filsystemet fra siste forelesning i kurset (eller tilsvarende) for å la brukerne lagre filer som skal publiseres.
 
