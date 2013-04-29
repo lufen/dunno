@@ -1,11 +1,18 @@
 <?php
 require_once 'sessionStart.php';
 require "db.php";
+// Get number of elements already for this page
+$sql = 'Select count(id) as number from elements where pageID=:pageID';
+$sthOldValue = $db->prepare ($sql);
+$sthOldValue->bindParam (':pageID', $_SESSION['pageID']);
+$sthOldValue->execute ();
+$row = $sthOldValue->fetch();
+
 $sql = 'INSERT INTO elements (pageID,content,place)VALUES (:pageID,:content,:place)';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':pageID', $_SESSION['pageID']);
 $sth->bindParam (':content', $_GET['text']);
-$place = 1;
+$place = $row['number']+1;
 $sth->bindParam (':place',$place);
 $sth->execute ();
 

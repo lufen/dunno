@@ -181,6 +181,7 @@ function getMYPages() {
 };
 
 function openPage(id) {
+	// Open page, and allow for editing
 	$.ajax({
 		url: 'openPage.php',
 		type: 'get',
@@ -189,7 +190,13 @@ function openPage(id) {
 			$('#Main').html('');
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
-			$('#Main').append('<div id=elem>'+value["content"]+'</div>');
+				$.ajax({
+					url: 'setPlacement.html',
+					success: function (data) {
+					$('#Main').append('<div class=\'elem\' id='+value['id']+'>'+value["content"]+data+'<input type="hidden" name="id" value="'+value['id']+'">'+'<input type="number" id="place" min=0 value='+value['place']+'></form>');
+				}
+				});
+				$('#Main').append('</div>');
 			});
 			LoadEditMenu();
 			$.ajax({
@@ -206,6 +213,7 @@ function openPage(id) {
 };
 
 function openPublicPage(form) {
+	// Open page, but not allow for editing
 	$.ajax({
 		url: 'openPublicPage.php',
 		type: 'get',
@@ -215,7 +223,7 @@ function openPublicPage(form) {
 			$('#Main').html('');
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
-				$('#Main').append('<div id=elem>'+value["content"]+'</div>');
+				$('#Main').append('<div class=\'elem\' id='+value['id']+'>'+value["content"]+'</div>');
 			});
 			$.ajax({
 				url: 'getTitle.php',
@@ -292,8 +300,24 @@ function addElement(form) {
 			} else {
 				alert (data.message);
 			}
-			
 		}
+	});
+};
+
+function SetPlacement(form){
+	// Update the placement of the element
+	$.ajax({
+	url: 'setPosition.php',
+	type: 'get',
+	data: {'id': form.id.value, 'place': form.place.value},
+	success: function (tmp) {
+		data = eval ('('+tmp+')');
+		if (data.ok == 'OK') {
+			openPage(data.id);
+		} else {
+			alert (data.message);
+		}
+	}
 	});
 };
 

@@ -21,7 +21,7 @@ body{
 	border-color: #FF2400;
 }
 
-#elem{
+.elem{
 	float: left;
 	border-radius: 10px;
 	width: 84%;
