@@ -36,6 +36,7 @@ function loginDialog () {
 function LoadpublicMenu () {
 	$('#PublicMenu').hide();
 	$.ajax({
+		async:true,
 	url: 'getPublicPages.php',
 	cache: 'false',
 	success: function (tmp) {
@@ -70,6 +71,7 @@ function toogleAddFile(){
 function AmILoggedIn() {
 	// Return OK if the user is logged in.
 	$.ajax({
+		async:true,
 		url: 'isLoggedIn.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -110,6 +112,7 @@ function hideEditMenu(){
 function LoadEditMenu(){
 	$('#EditMenu').load('editMenu.html');
 	$.ajax({
+		async:true,
 		url: 'getPagePrivateStatus.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -133,6 +136,7 @@ function newUser (form) {
 		form.pwd.focus();
 	}
 	$.ajax({
+
 		url: 'registerNewUser.php',
 		type: 'get',
 		data: { email: form.email.value, password: form.password.value },
@@ -140,6 +144,7 @@ function newUser (form) {
 			data = eval ('('+tmp+')');
 			if (data.ok=="OK") {
 				$.ajax({
+					async:true,
 					url: 'login.php',
 					type: 'get',
 					data: {'email': form.email.value, 'password': form.password.value},
@@ -157,6 +162,7 @@ function newUser (form) {
 
 function login(form) {
 	$.ajax({
+		async:true,
 		url: 'login.php',
 		type: 'get',
 		data: {'email': form.email.value, 'password': form.password.value},
@@ -174,6 +180,7 @@ function login(form) {
 
 function logout() {
 	$.ajax({
+		async:true,
 		url: 'logout.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -187,6 +194,7 @@ function logout() {
 
 function getMYPages() {
 	$.ajax({
+		async:true,
 		url: 'getMyPages.php',
 		success: function (tmp) {
 			$('#sidebar').html('<P> My pages: </P>');
@@ -202,6 +210,7 @@ function getMYPages() {
 function openPage(id) {
 	// Open page, and allow for editing
 	$.ajax({
+		async:true,
 		url: 'openPage.php',
 		type: 'get',
 		data: {'id': id},
@@ -234,6 +243,7 @@ function openPage(id) {
 function openPublicPage(form) {
 	// Open page, but not allow for editing
 	$.ajax({
+		async:true,
 		url: 'openPublicPage.php',
 		type: 'get',
 		data: {'id': form.page.value},
@@ -259,6 +269,7 @@ function openPublicPage(form) {
 
 function addPage(form) {
 	$.ajax({
+		async:true,
 		url: 'AddPage.php',
 		type: 'get',
 		data: {'title': form.title.value},
@@ -277,6 +288,7 @@ function addPage(form) {
 
 function setPrivate() {
 	$.ajax({
+		async:true,
 		url: 'setPrivate.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -293,6 +305,7 @@ function setPrivate() {
 
 function setPublic() {
 	$.ajax({
+		async:true,
 		url: 'setPublic.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -309,6 +322,7 @@ function setPublic() {
 
 function addTextElement(form) {
 	$.ajax({
+		async:true,
 		url: 'AddElement.php',
 		type: 'get',
 		data: {'text': tinyMCE.activeEditor.getContent()},
@@ -327,6 +341,7 @@ function addTextElement(form) {
 function addIframeElement(form) {
 	url = '<iframe src="'+form.URL.value+'"></iframe>';
 	$.ajax({
+		async:true,
 		url: 'AddElement.php',
 		type: 'get',
 		data: {'text': url},
@@ -344,6 +359,7 @@ function addIframeElement(form) {
 function SetPlacement(form){
 	// Update the placement of the element
 	$.ajax({
+	async:true,
 	url: 'setPosition.php',
 	type: 'get',
 	data: {'id': form.id.value, 'place': form.place.value},
@@ -379,6 +395,7 @@ function OpenaddPageDialog () {
 function OpenAddElementDialog () {
 	// Show the new element dialog.	
 		$.ajax({
+		async:true,
 		url: 'addNewTextElement.html',
 		success: function (data) {
 			$('#Main').html(data);
