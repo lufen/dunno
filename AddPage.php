@@ -4,7 +4,6 @@ require "db.php";
 $sql = 'INSERT INTO pages (userID,title,public)VALUES (:userID,:title,:public)';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':userID', $_SESSION['id']);
-session_write_close();
 $sth->bindParam (':title', $_GET['title']);
 $pub = 0;
 $sth->bindParam (':public', $pub);
