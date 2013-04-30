@@ -1,12 +1,10 @@
 body{
 	margin: 50px;	
-	background-image:url('background1.jpg');
+	background-image:url('chr.png');
 	background-repeat:no-repeat;
 	background-attachment:fixed;
 	background-position:center; 
 	padding-left: 50px;
-	
-
 }
 
 #Main{
@@ -22,7 +20,9 @@ body{
 	padding-bottom: 10px;
 }
 
-
+iframe {
+	min-width: 100%; min-height: 100%;
+	}
 
 .elem{
 	float: left;
@@ -111,3 +111,4 @@ body{
     z-index:1234;
     overflow: auto;
 }
+
