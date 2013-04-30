@@ -1,24 +1,25 @@
 body{
-	margin: 50px;
+	margin: 50px;	
+	background-image:url('background1.jpg');
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center; 
 	padding-left: 50px;
-	border-style:solid;
-	border-width: 1px;
+	
+
 }
 
 #Main{
 	float: left;
 	border-radius: 10px;
-	width: 82%;
-	background-color: #ffffff;
+	width: 82.5%;
 	opacity: .8;
+	background-color: #ffffff;
 	margin-bottom: 10px;
 	margin-left: 10px;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 .elem{
@@ -28,12 +29,10 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 50px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 #logo{
@@ -44,11 +43,9 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 #LoginMenu{
@@ -59,11 +56,9 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 #PublicMenu{
@@ -74,11 +69,9 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 #EditMenu{
@@ -89,11 +82,9 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
 }
 
 #sidebar{
@@ -104,11 +95,10 @@ body{
 	background-color: #ffffff;
 	opacity: .8;
 	margin-bottom: 10px;
+	margin-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style:solid;
-	border-width:1px;
-	border-color: #FF2400;
+	text-indent:10px;
 }
 
 .spinner {
