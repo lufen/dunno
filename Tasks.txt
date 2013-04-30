@@ -4,7 +4,7 @@ Redigere brukerdata <-- Harald
 Pålogget bruker skal kunne lage nye elementer på "sine sider." <-- Somewhat done, kan lage tekst og iframe elementer
 Elementene på siden må kunne sorteres uavhengig av når de blir laget <-- Somewhat done
 Lag en mulighet til å sette inn alternativt innhold via en iframe, innholdet i denne iframen kan komme fra en fil i filsystemet i systemet eller en ekstern URL..
-	Benytt filsystemet fra siste forelesning i kurset (eller tilsvarende) for å la brukerne lagre filer som skal publiseres.
+	Benytt filsystemet fra siste forelesning i kurset (eller tilsvarende) for å la brukerne lagre filer som skal publiseres. <-- Blæææææ
 
 Kan være med (dette er bare forslag, det er helt sikkert masse annet morsomt som kan legges inn her)
 Styr rettigheter med grupper (rettighetsstyring kan gjøres til et prosjekt i seg selv.)
