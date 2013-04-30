@@ -49,7 +49,26 @@ function LoadpublicMenu () {
 	$("#PublicMenu").show();
 }
 
+// Show the element asked for, and hide the rest.
+function toogleAddText(){
+	$('#iframePage').hide();
+	$('#Addfile').hide();
+	$('#textElement').toggle();  
+}
+
+function toogleAddIframe(){
+	$('#textElement').hide();
+	$('#Addfile').hide();
+	$('#iframePage').toggle();  
+}
+function toogleAddFile(){
+	$('#textElement').hide();
+	$('#iframePage').hide();
+	$('#Addfile').toggle();  
+}
+
 function AmILoggedIn() {
+	// Return OK if the user is logged in.
 	$.ajax({
 		url: 'isLoggedIn.php',
 		success: function (tmp) {
@@ -288,11 +307,29 @@ function setPublic() {
 	});
 };
 
-function addElement(form) {
+function addTextElement(form) {
 	$.ajax({
 		url: 'AddElement.php',
 		type: 'get',
 		data: {'text': tinyMCE.activeEditor.getContent()},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				openPage(data.id);
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+};
+
+
+function addIframeElement(form) {
+	url = '<iframe src="'+form.URL.value+'"></iframe>';
+	$.ajax({
+		url: 'AddElement.php',
+		type: 'get',
+		data: {'text': url},
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
