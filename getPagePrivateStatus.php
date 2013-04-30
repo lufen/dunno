@@ -4,6 +4,7 @@ require "db.php";
 $sql = 'SELECT public FROM pages WHERE id=:pageID';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':pageID', $_SESSION['pageID']);
+session_write_close();
 $sth->execute ();
 
 $row = $row = $sth->fetch();

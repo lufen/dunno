@@ -8,6 +8,7 @@ $sth->execute ();
 
 // Last page opened
 $_SESSION['pageID'] = $_GET['id'];
+session_write_close();
 
 $row = $sth->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($row);
