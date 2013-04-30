@@ -1,5 +1,4 @@
 <?php
-require_once 'sessionStart.php';
 require "db.php";
 $sql = 'SELECT title FROM pages WHERE id=:pageID';
 $sth = $db->prepare ($sql);
