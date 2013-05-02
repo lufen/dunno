@@ -1,6 +1,6 @@
 <input type="button" value="Add text" onclick="javascript:toogleAddText();"/>
 <input type="button" value="Add page" onclick="javascript:toogleAddIframe();"/>
-<input type="button" value="Add file" onclick="javascript:toogleAddFile();"/>
+<input type="button" value="Add file" onclick="javascript:OpenFilesDialog();"/>
 
 <div id=textElement style="display:none;">
 	<form onsubmit="return false;">
@@ -14,12 +14,5 @@
 	The URL you want to add<br/>
 	<input type="text" name="URL" title="URL"/><br/>
 	<input type="button" value="Add element" onclick="javascript:addIframeElement(this.form);"/>
-	</form>
-</div>
-<div id=Addfile style="display:none;">
- 	<form onsubmit="return false;">
-	The File you want to add<br/>
-	<input type="text" name="file" title="File"/><br/>
-	<input type="button" value="Add element" onclick="javascript:addElement(this.form);"/>
 	</form>
 </div>

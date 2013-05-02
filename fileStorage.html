@@ -24,6 +24,17 @@
 	</form>
 </div>
 
+<div id="publish-form" title="Publish file" style="display:none;" >
+  	<form onsubmit="return false;">
+  		<div id="fileName"></div>
+  		<input type="hidden" id="fileID" name="fileID" value="-1" />
+  		Page:
+		<select id="pageToPublishTo" name="pageToPublishTo" required>
+		</select><br/>
+		<input type="button" value="Add" onclick="javascript:publishFile(this.form)"/>
+	</form>
+</div>
+
 <div id="MyFiles" title="MyFiles" >
 </div>
 

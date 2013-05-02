@@ -51,6 +51,17 @@ function OpenFilesDialog(){
 			});
 		}
 	});
+	$.ajax({
+		async:true,
+		url: 'getMyPages.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$("#pageToPublishTo").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
+			});
+		}
+	});
 }
 
 function getFilesInFolder(id){
@@ -67,11 +78,59 @@ function getFilesInFolder(id){
 			$("#FilesInFolder").append("<H1>Files:</H1>");
 			$("#FilesInFolder").append("<b>Filename: &nbsp;  Type: &nbsp;Size:<b><br/>");
 			$.each(jsonData, function (index, value) {
-				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a><br/>';
-				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+link+"<br/>");
+				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a>';
+				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
+				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+link+publish+"<br/>");
 			});
 		}
 	});
+}
+
+function publishFileDialog (id) {
+	$("#fileID").val(id);
+	// Show the login dialog.
+   $("#publish-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function publishFile(form){
+	$.ajax({
+		async:false,
+		url: 'getFileName.php',
+		type: 'get',
+		data: {'id': form.fileID.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			link = '<a href="downloadFile.php?id='+form.fileID.value+'">Download '+data.name+'</a>';
+		}
+	});
+	$.ajax({
+		async:false,
+		url: 'AddElementToPage.php',
+		type: 'get',
+		data: {'text': link, 'pageID': form.pageToPublishTo.value, 'fileID': form.fileID.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				openPage(data.id);
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+	$("#publish-form").dialog("close");
 }
 
 function AddFolderDialog () {
