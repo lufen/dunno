@@ -35,6 +35,7 @@ function loginDialog () {
 }
 
 function OpenFilesDialog(){
+	$('#EditMenu').hide();
 	// Open file storage
 	$('#Main').load('fileStorage.html');
 	// Get list of users folders
