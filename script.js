@@ -35,7 +35,7 @@ function loginDialog () {
 }
 
 function OpenFilesDialog(){
-	$('#EditMenu').hide();
+	hideEditMenu();
 	// Open file storage
 	$('#Main').load('fileStorage.html');
 	// Get list of users folders
@@ -247,7 +247,7 @@ function LoadDefaultMainPage () {
 	// Show the new user dialog.
 	$('#userInt').hide();	
 	$('#Main').load('main.html');
-	$('#EditMenu').hide();
+	hideEditMenu();
 	$('#sidebar').hide();
 	$('#LoginMenu').load('topMenuUNloggedin.html');
 	LoadpublicMenu();
@@ -258,7 +258,7 @@ function LoadLoggedInMainPage () {
 	// Show the new user dialog.	
 	$('#Main').load('loggedInMain.html');
 	$('#LoginMenu').load('topMenuLoggedIn.html');
-	$('#EditMenu').hide();
+	hideEditMenu();
 	getMYPages();
 	LoadpublicMenu();
 	document.title = "Web page making system";
@@ -383,6 +383,7 @@ function openPage(id) {
 				}
 				});
 				$('#Main').append('</div>');
+				 $('#Main').sortable();
 			});
 			LoadEditMenu();
 			$.ajax({
