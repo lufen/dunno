@@ -78,11 +78,11 @@ function getFilesInFolder(id){
 			$.each(jsonData, function (index, value) {
 				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a>';
 				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
-				$("#FilesInFolderColumn1").append(value['name']);
-				$("#FilesInFolderColumn2").append(value['mine']);
-				$("#FilesInFolderColumn3").append(value['size']);
-				$("#FilesInFolderColumn4").append(link);
-				$("#FilesInFolderColumn5").append(publish);
+				$("#FilesInFolderColumn1").append(value['name']+"<br/><br/>");
+				$("#FilesInFolderColumn2").append(value['mine']+"<br/><br/>");
+				$("#FilesInFolderColumn3").append(value['size']+"<br/><br/>");
+				$("#FilesInFolderColumn4").append(link+"<br/>");
+				$("#FilesInFolderColumn5").append(publish+"<br/>");
 			});
 		}
 	});
