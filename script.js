@@ -15,6 +15,7 @@ function newUserDialog () {
 		]
 	}).dialog("open");
 }
+
 function loginDialog () {
 	// Show the login dialog.
    $("#login-form").dialog({
@@ -33,19 +34,122 @@ function loginDialog () {
       }).dialog("open");
 }
 
+function OpenFilesDialog(){
+	// Open file storage
+	$('#Main').load('fileStorage.html');
+	// Get list of users folders
+	$.ajax({
+		async:true,
+		url: 'getFolders.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$("#MyFiles").append("<H1>My folders</H1>");
+			$.each(jsonData, function (index, value) {
+				$("#MyFiles").append('<a href="javascript:getFilesInFolder('+value["id"]+')">'+value["name"]+'</a><br/>');
+				$("#foldersCreated").append('<option value='+value["id"]+' >'+value["name"]+'</option>');
+			});
+		}
+	});
+}
+
+function getFilesInFolder(id){
+	// Get the list of files inside a folder
+	$.ajax({
+		async:true,
+		url: 'getFilesInFolder.php',
+		cache: 'false',
+		type: 'get',
+		data: { id: id},
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$("#FilesInFolder").empty();
+			$("#FilesInFolder").append("<H1>Files:</H1>");
+			$("#FilesInFolder").append("<b>Filename: &nbsp;  Type: &nbsp;Size:<b><br/>");
+			$.each(jsonData, function (index, value) {
+				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+"<br/>");
+			});
+		}
+	});
+}
+
+function AddFolderDialog () {
+	// Show the login dialog.
+   $("#folder-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function UploadFileDialog () {
+	// Show the login dialog.
+   $("#file-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function AddFolder(form){
+	$.ajax({
+		async:true,
+		url: 'addFolder.php',
+		type: 'get',
+		data: {'folderName': form.folderName.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				alert ("Folder added");
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+	OpenFilesDialog();
+	$("#folder-form").dialog("close");
+}
+
+function uploadFile() {
+	$('#file-form .status').show();
+	return true;
+}
+
+function fileUploaded() {
+	$('#file-form').dialog('close');
+}
+
 function LoadpublicMenu () {
 	$('#PublicMenu').hide();
 	$.ajax({
 		async:true,
-	url: 'getPublicPages.php',
-	cache: 'false',
-	success: function (tmp) {
-		var jsonData = jQuery.parseJSON(tmp);
-		$.each(jsonData, function (index, value) {
-			$("#page").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
-		});
-	}
-});
+		url: 'getPublicPages.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$("#page").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
+			});
+		}
+	});
 	$('#PublicMenu').load('publicPages.html');
 	$("#PublicMenu").show();
 }
@@ -136,7 +240,6 @@ function newUser (form) {
 		form.pwd.focus();
 	}
 	$.ajax({
-
 		url: 'registerNewUser.php',
 		type: 'get',
 		data: { email: form.email.value, password: form.password.value },

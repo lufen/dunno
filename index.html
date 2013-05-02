@@ -12,6 +12,15 @@
 $(document).ready (function() {
 	AmILoggedIn();
 });
+
+function uploadFile() {
+	$('#file-form .status').show();
+	return true;
+}
+
+function fileUploaded() {
+	$('#file-form').dialog('close');
+}
 </script>
 
 <script type="text/javascript">
