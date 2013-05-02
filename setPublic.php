@@ -4,6 +4,7 @@ require "db.php";
 $sql = 'UPDATE pages set public=1 where id=:pageID';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':pageID', $_SESSION['pageID']);
+
 $sth->execute ();
 if($sth->rowCount() == 0){
 	echo json_encode (array ('message'=>'Failed'));

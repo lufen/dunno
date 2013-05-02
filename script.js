@@ -15,6 +15,7 @@ function newUserDialog () {
 		]
 	}).dialog("open");
 }
+
 function loginDialog () {
 	// Show the login dialog.
    $("#login-form").dialog({
@@ -33,24 +34,148 @@ function loginDialog () {
       }).dialog("open");
 }
 
+function OpenFilesDialog(){
+	// Open file storage
+	$('#Main').load('fileStorage.html');
+	// Get list of users folders
+	$.ajax({
+		async:true,
+		url: 'getFolders.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$("#MyFiles").append("<H1>My folders</H1>");
+			$.each(jsonData, function (index, value) {
+				$("#MyFiles").append('<a href="javascript:getFilesInFolder('+value["id"]+')">'+value["name"]+'</a><br/>');
+				$("#foldersCreated").append('<option value='+value["id"]+' >'+value["name"]+'</option>');
+			});
+		}
+	});
+}
+
+function getFilesInFolder(id){
+	// Get the list of files inside a folder
+	$.ajax({
+		async:true,
+		url: 'getFilesInFolder.php',
+		cache: 'false',
+		type: 'get',
+		data: { id: id},
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$("#FilesInFolder").empty();
+			$("#FilesInFolder").append("<H1>Files:</H1>");
+			$("#FilesInFolder").append("<b>Filename: &nbsp;  Type: &nbsp;Size:<b><br/>");
+			$.each(jsonData, function (index, value) {
+				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+"<br/>");
+			});
+		}
+	});
+}
+
+function AddFolderDialog () {
+	// Show the login dialog.
+   $("#folder-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function UploadFileDialog () {
+	// Show the login dialog.
+   $("#file-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function AddFolder(form){
+	$.ajax({
+		async:true,
+		url: 'addFolder.php',
+		type: 'get',
+		data: {'folderName': form.folderName.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				alert ("Folder added");
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+	OpenFilesDialog();
+	$("#folder-form").dialog("close");
+}
+
+function uploadFile() {
+	$('#file-form .status').show();
+	return true;
+}
+
+function fileUploaded() {
+	$('#file-form').dialog('close');
+}
+
 function LoadpublicMenu () {
 	$('#PublicMenu').hide();
 	$.ajax({
-	url: 'getPublicPages.php',
-	cache: 'false',
-	success: function (tmp) {
-		var jsonData = jQuery.parseJSON(tmp);
-		$.each(jsonData, function (index, value) {
-			$("#page").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
-		});
-	}
-});
+		async:true,
+		url: 'getPublicPages.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$("#page").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
+			});
+		}
+	});
 	$('#PublicMenu').load('publicPages.html');
 	$("#PublicMenu").show();
 }
 
+// Show the element asked for, and hide the rest.
+function toogleAddText(){
+	$('#iframePage').hide();
+	$('#Addfile').hide();
+	$('#textElement').toggle();  
+}
+
+function toogleAddIframe(){
+	$('#textElement').hide();
+	$('#Addfile').hide();
+	$('#iframePage').toggle();  
+}
+function toogleAddFile(){
+	$('#textElement').hide();
+	$('#iframePage').hide();
+	$('#Addfile').toggle();  
+}
+
 function AmILoggedIn() {
+	// Return OK if the user is logged in.
 	$.ajax({
+		async:true,
 		url: 'isLoggedIn.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -91,6 +216,7 @@ function hideEditMenu(){
 function LoadEditMenu(){
 	$('#EditMenu').load('editMenu.html');
 	$.ajax({
+		async:true,
 		url: 'getPagePrivateStatus.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -121,6 +247,7 @@ function newUser (form) {
 			data = eval ('('+tmp+')');
 			if (data.ok=="OK") {
 				$.ajax({
+					async:true,
 					url: 'login.php',
 					type: 'get',
 					data: {'email': form.email.value, 'password': form.password.value},
@@ -138,6 +265,7 @@ function newUser (form) {
 
 function login(form) {
 	$.ajax({
+		async:true,
 		url: 'login.php',
 		type: 'get',
 		data: {'email': form.email.value, 'password': form.password.value},
@@ -155,6 +283,7 @@ function login(form) {
 
 function logout() {
 	$.ajax({
+		async:true,
 		url: 'logout.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -168,6 +297,7 @@ function logout() {
 
 function getMYPages() {
 	$.ajax({
+		async:true,
 		url: 'getMyPages.php',
 		success: function (tmp) {
 			$('#sidebar').html('<P> My pages: </P>');
@@ -183,6 +313,7 @@ function getMYPages() {
 function openPage(id) {
 	// Open page, and allow for editing
 	$.ajax({
+		async:true,
 		url: 'openPage.php',
 		type: 'get',
 		data: {'id': id},
@@ -215,6 +346,7 @@ function openPage(id) {
 function openPublicPage(form) {
 	// Open page, but not allow for editing
 	$.ajax({
+		async:true,
 		url: 'openPublicPage.php',
 		type: 'get',
 		data: {'id': form.page.value},
@@ -240,6 +372,7 @@ function openPublicPage(form) {
 
 function addPage(form) {
 	$.ajax({
+		async:true,
 		url: 'AddPage.php',
 		type: 'get',
 		data: {'title': form.title.value},
@@ -258,6 +391,7 @@ function addPage(form) {
 
 function setPrivate() {
 	$.ajax({
+		async:true,
 		url: 'setPrivate.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -274,6 +408,7 @@ function setPrivate() {
 
 function setPublic() {
 	$.ajax({
+		async:true,
 		url: 'setPublic.php',
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
@@ -288,8 +423,9 @@ function setPublic() {
 	});
 };
 
-function addElement(form) {
+function addTextElement(form) {
 	$.ajax({
+		async:true,
 		url: 'AddElement.php',
 		type: 'get',
 		data: {'text': tinyMCE.activeEditor.getContent()},
@@ -304,9 +440,29 @@ function addElement(form) {
 	});
 };
 
+
+function addIframeElement(form) {
+	url = '<iframe src="'+form.URL.value+'"></iframe>';
+	$.ajax({
+		async:true,
+		url: 'AddElement.php',
+		type: 'get',
+		data: {'text': url},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				openPage(data.id);
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+};
+
 function SetPlacement(form){
 	// Update the placement of the element
 	$.ajax({
+	async:true,
 	url: 'setPosition.php',
 	type: 'get',
 	data: {'id': form.id.value, 'place': form.place.value},
@@ -356,6 +512,7 @@ function OpenaddPageDialog () {
 function OpenAddElementDialog () {
 	// Show the new element dialog.	
 		$.ajax({
+		async:true,
 		url: 'addNewTextElement.html',
 		success: function (data) {
 			$('#Main').html(data);

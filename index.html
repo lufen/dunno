@@ -12,6 +12,15 @@
 $(document).ready (function() {
 	AmILoggedIn();
 });
+
+function uploadFile() {
+	$('#file-form .status').show();
+	return true;
+}
+
+function fileUploaded() {
+	$('#file-form').dialog('close');
+}
 </script>
 
 <script type="text/javascript">
@@ -26,7 +35,7 @@ $(document).ready(function(){
  });
 </script>
 	<div id="logo">
-		<img src="logo.png" alt="logo">
+		<img src="dunno1.png" alt="logo">
 	</div>
 
 </head>

@@ -1,5 +1,25 @@
-<form onsubmit="return false;">
-Write your text here<br/>
-<textarea id="text" style="width:100%; height:400px"></textarea>
-<input type="button" value="Add element" onclick="javascript:addElement(this.form);"/>
-</form>
+<input type="button" value="Add text" onclick="javascript:toogleAddText();"/>
+<input type="button" value="Add page" onclick="javascript:toogleAddIframe();"/>
+<input type="button" value="Add file" onclick="javascript:toogleAddFile();"/>
+
+<div id=textElement style="display:none;">
+	<form onsubmit="return false;">
+	Write your text here<br/>
+	<textarea id="textField" style="width:100%; height:400px"></textarea>
+	<input type="button" value="Add element" onclick="javascript:addTextElement(this.form);"/>
+	</form>
+</div>
+<div id=iframePage style="display:none;">
+ 	<form onsubmit="return false;">
+	The URL you want to add<br/>
+	<input type="text" name="URL" title="URL"/><br/>
+	<input type="button" value="Add element" onclick="javascript:addIframeElement(this.form);"/>
+	</form>
+</div>
+<div id=Addfile style="display:none;">
+ 	<form onsubmit="return false;">
+	The File you want to add<br/>
+	<input type="text" name="file" title="File"/><br/>
+	<input type="button" value="Add element" onclick="javascript:addElement(this.form);"/>
+	</form>
+</div>
