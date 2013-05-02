@@ -23,6 +23,4 @@
 ?><script type="text/javascript">
 // Call the script in the window that owns this iframe
 window.parent.window.fileUploaded();
-$('#file-form').dialog('close');
-//window.location = 'db.php';
 </script>

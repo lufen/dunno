@@ -67,7 +67,8 @@ function getFilesInFolder(id){
 			$("#FilesInFolder").append("<H1>Files:</H1>");
 			$("#FilesInFolder").append("<b>Filename: &nbsp;  Type: &nbsp;Size:<b><br/>");
 			$.each(jsonData, function (index, value) {
-				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+"<br/>");
+				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a><br/>';
+				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+link+"<br/>");
 			});
 		}
 	});
@@ -128,14 +129,7 @@ function AddFolder(form){
 	$("#folder-form").dialog("close");
 }
 
-function uploadFile() {
-	$('#file-form .status').show();
-	return true;
-}
 
-function fileUploaded() {
-	$('#file-form').dialog('close');
-}
 
 function LoadpublicMenu () {
 	$('#PublicMenu').hide();
