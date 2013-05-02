@@ -37,10 +37,31 @@ iframe {
 	padding-bottom: 50px;
 }
 
-#FilesInFolder{
-	clear: both;
-	margin: 20px;
-
+#MyFiles{
+	clear: both; /*don't let any other div float up, force below */
+	float: left;
+	border-radius: 10px;
+	width: 15%;
+	background-color: #ffffff;
+	opacity: .7;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-indent:10px;
+}
+.column{
+	float: left;
+	border-radius: 10px;
+	width: 10%;
+	opacity: .7;
+	background-color: #ffffff;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-top: 50px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #logo{
@@ -116,6 +137,8 @@ iframe {
     z-index:1234;
     overflow: auto;
 }
+
+
 
 input[type="button"] {
 	display: inline-block;

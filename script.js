@@ -75,13 +75,14 @@ function getFilesInFolder(id){
 		data: { id: id},
 		success: function (tmp) {
 			var jsonData = jQuery.parseJSON(tmp);
-			$("#FilesInFolder").empty();
-			$("#FilesInFolder").append("<H1>Files:</H1>");
-			$("#FilesInFolder").append("<b>Filename: &nbsp;  Type: &nbsp;Size:<b><br/>");
 			$.each(jsonData, function (index, value) {
 				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a>';
 				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
-				$("#FilesInFolder").append(value['name']+"&nbsp;&nbsp;"+value['mime']+"&nbsp;&nbsp;"+value['size']+link+publish+"<br/>");
+				$("#FilesInFolderColumn1").append(value['name']);
+				$("#FilesInFolderColumn2").append(value['mine']);
+				$("#FilesInFolderColumn3").append(value['size']);
+				$("#FilesInFolderColumn4").append(link);
+				$("#FilesInFolderColumn5").append(publish);
 			});
 		}
 	});
