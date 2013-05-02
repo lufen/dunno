@@ -11,7 +11,7 @@ body{
 	float: left;
 	border-radius: 10px;
 	width: 82.5%;
-	opacity: .8;
+	opacity: .7;
 	background-color: #ffffff;
 	margin-bottom: 10px;
 	margin-left: 10px;
@@ -29,7 +29,7 @@ iframe {
 	border-radius: 10px;
 	width: 84%;
 	background-color: #ffffff;
-	opacity: .8;
+	opacity: .7;
 	margin-bottom: 10px;
 	margin-left: 10px;
 	padding-left: 10px;
@@ -37,30 +37,35 @@ iframe {
 	padding-bottom: 50px;
 }
 
+#FilesInFolder{
+	clear: both;
+	margin: 20px;
+
+}
+
 #logo{
 	clear: both;
-	float: left;
+	width: 25%;
 	border-radius: 10px;
-	width:100%;
+	text-align: center;
 	background-color: #ffffff;
-	opacity: .8;
-	margin-bottom: 10px;
-	margin-left: 10px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	opacity: .7;
+	margin-left: 35%;
+	padding:10px;
 }
 
 #LoginMenu{
 	clear: both;
-	float: left;
 	border-radius: 10px;
 	width:100%;
 	background-color: #ffffff;
-	opacity: .8;
+	opacity: .7;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	margin-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	
 }
 
 #PublicMenu{
@@ -69,7 +74,7 @@ iframe {
 	border-radius: 10px;
 	width:100%;
 	background-color: #ffffff;
-	opacity: .8;
+	opacity: .7;
 	margin-bottom: 10px;
 	margin-left: 10px;
 	padding-top: 10px;
@@ -82,7 +87,7 @@ iframe {
 	border-radius: 10px;
 	width:100%;
 	background-color: #ffffff;
-	opacity: .8;
+	opacity: .7;
 	margin-bottom: 10px;
 	margin-left: 10px;
 	padding-top: 10px;
@@ -95,7 +100,7 @@ iframe {
 	border-radius: 10px;
 	width: 15%;
 	background-color: #ffffff;
-	opacity: .8;
+	opacity: .7;
 	margin-bottom: 10px;
 	margin-left: 10px;
 	padding-top: 10px;
