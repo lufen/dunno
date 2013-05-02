@@ -79,7 +79,7 @@ function getFilesInFolder(id){
 				link = '<a href="downloadFile.php?id='+value["id"]+'">Download</a>';
 				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
 				$("#FilesInFolderColumn1").append(value['name']+"<br/><br/>");
-				$("#FilesInFolderColumn2").append(value['mine']+"<br/><br/>");
+				$("#FilesInFolderColumn2").append(value['mime']+"<br/><br/>");
 				$("#FilesInFolderColumn3").append(value['size']+"<br/><br/>");
 				$("#FilesInFolderColumn4").append(link+"<br/>");
 				$("#FilesInFolderColumn5").append(publish+"<br/>");
