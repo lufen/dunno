@@ -52,6 +52,7 @@ function OpenFilesDialog(){
 			});
 		}
 	});
+	// Make ready the list of pages, if user wants to publish a file
 	$.ajax({
 		async:true,
 		url: 'getMyPages.php',
@@ -63,6 +64,16 @@ function OpenFilesDialog(){
 			});
 		}
 	});
+}
+
+function parseSize(size) {
+	// http://blog.jbstrickler.com/2011/02/bytes-to-a-human-readable-string/
+	suffixes = ["Bytes", "KB", "MB"];
+	for (place=0;size >= 1024;place++){
+		size = size / 1024;
+	}
+
+	return Math.round(size * 10) / 10 + " " + suffixes[place];
 }
 
 function getFilesInFolder(id){
@@ -80,7 +91,7 @@ function getFilesInFolder(id){
 				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
 				$("#FilesInFolderColumn1").append(value['name']+"<br/><br/>");
 				$("#FilesInFolderColumn2").append(value['mime']+"<br/><br/>");
-				$("#FilesInFolderColumn3").append(value['size']+"<br/><br/>");
+				$("#FilesInFolderColumn3").append(parseSize(value['size'])+"<br/><br/>");
 				$("#FilesInFolderColumn4").append(link+"<br/>");
 				$("#FilesInFolderColumn5").append(publish+"<br/>");
 			});
@@ -373,17 +384,18 @@ function openPage(id) {
 		type: 'get',
 		data: {'id': id},
 		success: function (tmp) {
-			$('#Main').html('');
+			$('#Main').empty();
+			$('#Main').html('<ul id="sortable">');
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
-				$.ajax({
-					url: 'setPlacement.html',
-					success: function (data) {
-					$('#Main').append('<div class=\'elem\' id='+value['id']+'>'+value["content"]+data+'<input type="hidden" name="id" value="'+value['id']+'">'+'<input type="number" id="place" min=0 value='+value['place']+'></form>');
-				}
-				});
-				$('#Main').append('</div>');
-				 $('#Main').sortable();
+				$('#sortable ').append('<li class="ui-state-default" id="page_'+value['id']+'">'+value["content"]+'</li>');
+				
+				$("#sortable ").sortable({
+					placeholder: "ui-sortable-placeholder",
+					update: function(event, ui) {
+        				$.post("UpdatePosition.php", { pages: $('#sortable ').sortable('serialize') } );
+    				},    
+				}).disableSelection();
 			});
 			LoadEditMenu();
 			$.ajax({
