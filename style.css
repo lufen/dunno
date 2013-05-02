@@ -37,6 +37,12 @@ iframe {
 	padding-bottom: 50px;
 }
 
+#FilesInFolder{
+	clear: both;
+	margin: 20px;
+
+}
+
 #logo{
 	clear: both;
 	width: 25%;
@@ -51,6 +57,7 @@ iframe {
 #LoginMenu{
 	clear: both;
 	border-radius: 10px;
+	width:100%;
 	background-color: #ffffff;
 	opacity: .7;
 	margin-bottom: 10px;
