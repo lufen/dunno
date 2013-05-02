@@ -20,4 +20,9 @@
 		print_r ($sth->errorInfo());		// For debuging purposes
 	} else	// Give error message if no file uploaded
 		die ('<script type="text\javascript">\nalert ("Ingen fil lastet opp!!!");\n</script>');
-?>
+?><script type="text/javascript">
+// Call the script in the window that owns this iframe
+window.parent.window.fileUploaded();
+$('#file-form').dialog('close');
+//window.location = 'db.php';
+</script>
