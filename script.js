@@ -321,6 +321,20 @@ function SetPlacement(form){
 	});
 };
 
+function findEmail(){
+	$.ajax({
+		url: 'findEmail.php',
+		success: function(tmp){
+			data = eval('('+tmp+')');
+			if (data.ok == 'OK') {
+				openPage();
+			} else {
+				alert (data.message);
+			}
+		}
+	})
+}
+
 function OpenaddPageDialog () {
 	// Show the new page dialog.	
    $("#addPage-form").dialog({
