@@ -1,19 +1,10 @@
 // Show the element asked for, and hide the rest.
-function toogleAddText(){
-	$('#iframePage').hide();
-	$('#Addfile').hide();
-	$('#textElement').toggle();  
+function showAddTextElement(){
+	OpenAddElementDialog();
 }
 
-function toogleAddIframe(){
-	$('#textElement').hide();
-	$('#Addfile').hide();
-	$('#iframePage').toggle();  
-}
-function toogleAddFile(){
-	$('#textElement').hide();
-	$('#iframePage').hide();
-	$('#Addfile').toggle();  
+function showAddIframe(){
+	$('#Main').load('elementHandling/iframeform.html');  
 }
 
 // Functions for edit menu
@@ -259,3 +250,7 @@ function OpenAddElementDialog () {
 		}
 	});
 };
+
+ function showMenu(){
+   $('#menuID').toggle();
+ }
