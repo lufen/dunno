@@ -2,12 +2,20 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+<link rel="stylesheet" href="jquery.dataTables.css" type="text/css" media="screen"/>
+<link href="css/ui-lightness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
+
 <title>Web page making system</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<link href="css/ui-lightness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
 <script src="js/jquery-ui-1.10.2.custom.js"></script>
 <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
+
 <script src="script.js"></script>
+<script src="userHandling/user.js"></script>
+<script src="elementHandling/element.js"></script>
+<script src="fileStorage/fileStorage.js"></script>
+<script src="jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready (function() {
 	AmILoggedIn();
@@ -19,6 +27,7 @@ function uploadFile() {
 }
 
 function fileUploaded() {
+	$('#file-form .status').hide();
 	$('#file-form').dialog('close');
 }
 </script>
