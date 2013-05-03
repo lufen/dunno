@@ -78,10 +78,13 @@ $(document).ready(function(){
 		</form>
 	</div>
 
-	<div id='change email' title='Change your email' style='display:none;'>
+	<div id='changeEmail' title='Change your email' style='display:none'>
 		<form onsubmit='return false;'>
-			Email<br>
-			<input type='email' name='email' title='email' value='javascript:findEmail();'/> <br>
+			<label for="email">New E-mail</label>
+			<input type='email' name='email' title='E-mail' required='required'/><br>
+			<label for="confirmation">Confirm your new E-mail</label>
+			<input type='email' name='confirmation' title='E-mail' required='required'/><br>
+			<input type='button' value='Update E-mail address' onclick='javascript:updateInfo(this.form);'/>
 		</form>
 	</div>
 
@@ -97,6 +100,7 @@ $(document).ready(function(){
 
 	<div id="Main">
 	<p>Main</p> 
+
 	</div>
 
 </body>

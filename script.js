@@ -16,6 +16,23 @@ function newUserDialog () {
 	}).dialog("open");
 }
 
+function changeInfoDialog () {
+	$("#changeEmail").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		]
+	}).dialog("open");
+}
+
 function loginDialog () {
 	// Show the login dialog.
    $("#login-form").dialog({
@@ -128,6 +145,28 @@ function AddFolder(form){
 	$("#folder-form").dialog("close");
 }
 
+function updateInfo(form){
+	if (form.email.value!=form.confirmation.value) {
+		alert ("E-mail addresses has to match");
+		form.pwd.focus();
+	}
+	$.ajax({
+		async:true,
+		url: 'updateInformation.php',
+		type: 'get',
+		data: {'email': form.email.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok = 'OK'){
+				alert ("E-mail address changed");
+			} else {
+				alert (data.message);
+			}
+		}
+	})
+	$('#changeEmail').dialog('close');
+}
+
 function uploadFile() {
 	$('#file-form .status').show();
 	return true;
@@ -209,6 +248,13 @@ function LoadLoggedInMainPage () {
 	document.title = "Web page making system";
 }
 
+function LoadChangeUser () {
+	LoadLoggedInMainPage();
+	$('#changeEmail').show();
+	
+	document.title = "Change user information";
+}
+
 function hideEditMenu(){
 	// Hide edit menu, for those pages you can not edit.
 	$('#EditMenu').hide();
@@ -262,6 +308,8 @@ function newUser (form) {
 	});
 	$("#register-form").dialog("close");
 };
+
+
 
 function login(form) {
 	$.ajax({
