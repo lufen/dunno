@@ -15,10 +15,13 @@ function toogleAddFile(){
 	$('#iframePage').hide();
 	$('#Addfile').toggle();  
 }
+
+// Functions for edit menu
 function hideEditMenu(){
 	// Hide edit menu, for those pages you can not edit.
 	$('#EditMenu').hide();
 }
+
 function LoadEditMenu(){
 	$('#EditMenu').load('elementHandling/editMenu.html');
 	$.ajax({
@@ -40,6 +43,7 @@ function LoadEditMenu(){
 	$('#EditMenu').show();
 }
 
+// Get that I own
 function getMYPages() {
 	$.ajax({
 		async:true,
@@ -55,6 +59,7 @@ function getMYPages() {
 	$('#sidebar').show();
 };
 
+// Get the title of the page from DB, and set to browser
 function getAndSetTitle(id){
 	$.ajax({
 		url: 'elementHandling/getTitle.php',
@@ -67,8 +72,8 @@ function getAndSetTitle(id){
 	});
 }
 
+// Open page, and allow for editing
 function openPage(id) {
-	// Open page, and allow for editing
 	$.ajax({
 		async:true,
 		url: 'elementHandling/openPage.php',
@@ -94,8 +99,8 @@ function openPage(id) {
 	});
 };
 
+// Open page, but not allow for editing
 function openPublicPage(form) {
-	// Open page, but not allow for editing
 	$.ajax({
 		async:true,
 		url: 'elementHandling/openPublicPage.php',
@@ -113,6 +118,7 @@ function openPublicPage(form) {
 	});
 };
 
+// Add a new page
 function addPage(form) {
 	$.ajax({
 		async:true,
@@ -132,6 +138,7 @@ function addPage(form) {
 	$("#addPage-form").dialog("close");
 };
 
+// Functions for handling private/public settings
 function setPrivate() {
 	$.ajax({
 		async:true,
@@ -166,6 +173,8 @@ function setPublic() {
 	});
 };
 
+
+// Functions for adding new elements of different types
 function addTextElement(form) {
 	$.ajax({
 		async:true,
@@ -202,6 +211,7 @@ function addIframeElement(form) {
 	});
 };
 
+// Dialogs
 function OpenaddPageDialog () {
 	// Show the new page dialog.	
    $("#addPage-form").dialog({

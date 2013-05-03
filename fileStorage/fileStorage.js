@@ -1,35 +1,3 @@
-function OpenFilesDialog(){
-	hideEditMenu();
-	// Open file storage
-	$('#Main').load('fileStorage/fileStorage.html');
-	// Get list of users folders
-	$.ajax({
-		async:true,
-		url: 'fileStorage/getFolders.php',
-		cache: 'false',
-		success: function (tmp) {
-			var jsonData = jQuery.parseJSON(tmp);
-			$("#MyFiles").append("<H1>My folders</H1>");
-			$.each(jsonData, function (index, value) {
-				$("#MyFiles").append('<a href="javascript:getFilesInFolder('+value["id"]+')">'+value["name"]+'</a><br/>');
-				$("#foldersCreated").append('<option value='+value["id"]+' >'+value["name"]+'</option>');
-			});
-		}
-	});
-	// Make ready the list of pages, if user wants to publish a file
-	$.ajax({
-		async:true,
-		url: 'elementHandling/getMyPages.php',
-		cache: 'false',
-		success: function (tmp) {
-			var jsonData = jQuery.parseJSON(tmp);
-			$.each(jsonData, function (index, value) {
-				$("#pageToPublishTo").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
-			});
-		}
-	});
-}
-
 function parseSize(size) {
 	// http://blog.jbstrickler.com/2011/02/bytes-to-a-human-readable-string/
 	suffixes = ["Bytes", "KB", "MB"];
@@ -40,8 +8,8 @@ function parseSize(size) {
 	return Math.round(size * 10) / 10 + " " + suffixes[place];
 }
 
+// Get the list of files inside a folder
 function getFilesInFolder(id){
-	// Get the list of files inside a folder
 	$.ajax({
 		async:true,
 		url: 'fileStorage/getFilesInFolder.php',
@@ -63,25 +31,7 @@ function getFilesInFolder(id){
 	});
 }
 
-function publishFileDialog (id) {
-	$("#fileID").val(id);
-	// Show the login dialog.
-   $("#publish-form").dialog({
-		autoOpen: false,
-		height: 350,
-		width: 350,
-		modal: true,
-		buttons: [
-			{
-				text: "Close",
-				click: function() {
-				$( this ).dialog( "close" );
-				}
-			}
-		]
-      }).dialog("open");
-}
-
+// Publish a given file to the page the user wants to
 function publishFile(form){
 	$.ajax({
 		async:false,
@@ -110,6 +60,28 @@ function publishFile(form){
 	$("#publish-form").dialog("close");
 }
 
+// Make a new folder
+function AddFolder(form){
+	$.ajax({
+		async:true,
+		url: 'fileStorage/addFolder.php',
+		type: 'get',
+		data: {'folderName': form.folderName.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok == 'OK') {
+				alert ("Folder added");
+			} else {
+				alert (data.message);
+			}
+		}
+	});
+	OpenFilesDialog();
+	$("#folder-form").dialog("close");
+}
+
+
+// Dialogs 
 function AddFolderDialog () {
 	// Show the login dialog.
    $("#folder-form").dialog({
@@ -146,21 +118,53 @@ function UploadFileDialog () {
       }).dialog("open");
 }
 
-function AddFolder(form){
+function publishFileDialog (id) {
+	$("#fileID").val(id);
+	// Show the login dialog.
+   $("#publish-form").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+				$( this ).dialog( "close" );
+				}
+			}
+		]
+      }).dialog("open");
+}
+
+function OpenFilesDialog(){
+	hideEditMenu();
+	// Open file storage
+	$('#Main').load('fileStorage/fileStorage.html');
+	// Get list of users folders
 	$.ajax({
 		async:true,
-		url: 'fileStorage/addFolder.php',
-		type: 'get',
-		data: {'folderName': form.folderName.value},
+		url: 'fileStorage/getFolders.php',
+		cache: 'false',
 		success: function (tmp) {
-			data = eval ('('+tmp+')');
-			if (data.ok == 'OK') {
-				alert ("Folder added");
-			} else {
-				alert (data.message);
-			}
+			var jsonData = jQuery.parseJSON(tmp);
+			$("#MyFiles").append("<H1>My folders</H1>");
+			$.each(jsonData, function (index, value) {
+				$("#MyFiles").append('<a href="javascript:getFilesInFolder('+value["id"]+')">'+value["name"]+'</a><br/>');
+				$("#foldersCreated").append('<option value='+value["id"]+' >'+value["name"]+'</option>');
+			});
 		}
 	});
-	OpenFilesDialog();
-	$("#folder-form").dialog("close");
+	// Make ready the list of pages, if user wants to publish a file
+	$.ajax({
+		async:true,
+		url: 'elementHandling/getMyPages.php',
+		cache: 'false',
+		success: function (tmp) {
+			var jsonData = jQuery.parseJSON(tmp);
+			$.each(jsonData, function (index, value) {
+				$("#pageToPublishTo").append('<option value='+value["id"].toString()+' >'+value["title"]+'</option>');
+			});
+		}
+	});
 }
