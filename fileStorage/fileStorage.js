@@ -1,13 +1,3 @@
-function parseSize(size) {
-	// http://blog.jbstrickler.com/2011/02/bytes-to-a-human-readable-string/
-	suffixes = ["Bytes", "KB", "MB"];
-	for (place=0;size >= 1024;place++){
-		size = size / 1024;
-	}
-
-	return Math.round(size * 10) / 10 + " " + suffixes[place];
-}
-
 // Get the list of files inside a folder
 function getFilesInFolder(id){
 	$.ajax({
@@ -21,11 +11,13 @@ function getFilesInFolder(id){
 			$.each(jsonData, function (index, value) {
 				link = '<a href="fileStorage/downloadFile.php?id='+value["id"]+'">Download</a>';
 				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
-				$("#FilesInFolderColumn1").append(value['name']+"<br/><br/>");
-				$("#FilesInFolderColumn2").append(value['mime']+"<br/><br/>");
-				$("#FilesInFolderColumn3").append(parseSize(value['size'])+"<br/><br/>");
-				$("#FilesInFolderColumn4").append(link+"<br/>");
-				$("#FilesInFolderColumn5").append(publish+"<br/>");
+
+				var row = $('<tr><td>'+value['name']+'</td><td>'+value['mime']+'</td><td>'+value['size']+'</td><td>'+link+'</td><td>'+publish+'</td></tr>');
+			 	$('#fs-table').append(row);
+			});
+
+			$('#fs-table').dataTable({
+				 "bPaginate": false,
 			});
 		}
 	});
@@ -51,7 +43,7 @@ function publishFile(form){
 		success: function (tmp) {
 			data = eval ('('+tmp+')');
 			if (data.ok == 'OK') {
-				openPage(data.id);
+				openPage(form.pageToPublishTo.value);
 			} else {
 				alert (data.message);
 			}

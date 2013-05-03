@@ -35,9 +35,3 @@ function LoadLoggedInMainPage () {
 	LoadpublicMenu();
 	document.title = "Web page making system";
 }
-
-
-
-
-
-
