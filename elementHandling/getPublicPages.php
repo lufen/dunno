@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "../db.php";
 $sql = 'SELECT id,title FROM pages WHERE public=1';
 $sth = $db->prepare ($sql);
 $sth->execute ();

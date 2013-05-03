@@ -1,6 +1,6 @@
 <?php
-require_once 'sessionStart.php';
-require "db.php";
+require_once '../sessionStart.php';
+require "../db.php";
 
 parse_str($_POST['pages'], $pageOrder);
 foreach ($pageOrder['page'] as $key => $value) {

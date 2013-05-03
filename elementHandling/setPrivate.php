@@ -1,6 +1,6 @@
 <?php
-require_once 'sessionStart.php';
-require "db.php";
+require_once '../sessionStart.php';
+require "../db.php";
 $sql = 'UPDATE pages set public=0 where id=:pageID';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':pageID', $_SESSION['pageID']);

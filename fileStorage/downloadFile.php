@@ -1,6 +1,6 @@
 <?php
-require_once 'sessionStart.php';
-require "db.php";
+require_once '../sessionStart.php';
+require "../db.php";
 $sql = 'SELECT * FROM files WHERE (userID=:userID or published=1) and id=:id';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':userID', $_SESSION['id']);

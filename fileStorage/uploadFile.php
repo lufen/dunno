@@ -2,8 +2,8 @@
 /**
  * Script used to store files saved using standard file upload dialog
  */
-	require_once 'sessionStart.php';
-	require_once 'db.php';
+	require_once '../sessionStart.php';
+	require_once '../db.php';
 	
 	// SQL statement to insert a new file into the database
 	$sql = 'INSERT INTO files (folder, userID, name, mime,content, size)

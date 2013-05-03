@@ -1,5 +1,5 @@
 <?php
-require "db.php";
+require "../db.php";
 $sql = 'SELECT title FROM pages WHERE id=:pageID';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':pageID', $_GET['id']);

@@ -1,6 +1,6 @@
 <?php
-require_once 'sessionStart.php';
-require "db.php";
+require_once '../sessionStart.php';
+require "../db.php";
 $sql = 'SELECT id,name,size,mime FROM files WHERE userID=:userID and folder=:id';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':userID', $_SESSION['id']);

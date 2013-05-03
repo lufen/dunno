@@ -1,7 +1,7 @@
 <?php
 	function login ($email,$password) {
-		require_once 'sessionStart.php';
-		require "db.php";
+		require_once '../sessionStart.php';
+		require "../db.php";
 		$sql = 'SELECT * FROM users WHERE email=:email';
 		$sth = $db->prepare ($sql);
 		$sth->bindParam (':email', $email);
@@ -27,8 +27,8 @@ function convertPlainTextToEncrypted($password,$uid){
 }
 
 function registerUser($email, $password){
-	require "db.php";
-	require_once 'sessionStart.php';
+	require "../db.php";
+	require_once '../sessionStart.php';
 	$db->beginTransaction();
 	$db->query('LOCK TABLES users WRITE');
 	// Add user, then read back and update it with the encrypted one.
@@ -61,7 +61,7 @@ function registerUser($email, $password){
 
 // Check if user logged in, if not then redirect to login page.
 function CheckIfUserLoggedIn(){
-	require_once 'sessionStart.php';
+	require_once '../sessionStart.php';
 	if(!isset($_SESSION['id'])){
 		 header( 'Location: index.php' );
 		}
@@ -69,7 +69,7 @@ function CheckIfUserLoggedIn(){
 
 // Check that an admin is logged in
 function CheckIfAdminLoggedIn(){
-	require_once 'sessionStart.php';
+	require_once '../sessionStart.php';
 	if($_SESSION['userLevel'] != 2){
 		 header( 'Location: index.php' );
 		}
@@ -77,14 +77,14 @@ function CheckIfAdminLoggedIn(){
 
 // Check that a worker is logged in
 function CheckIfWorkerLoggedIn(){
-	require_once 'sessionStart.php';
+	require_once '../sessionStart.php';
 	if($_SESSION['userLevel'] != 1){
 		 header( 'Location: index.php' );
 		}
 }
 
 function emptyBasket(){
-	require_once 'sessionStart.php';
+	require_once '../sessionStart.php';
 	// Empty out the shoppingbasket
 	 foreach ($_SESSION as $key => $quantity){
 	    if($key ==="id" || $key === "userLevel")

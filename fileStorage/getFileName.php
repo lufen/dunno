@@ -1,6 +1,6 @@
 <?php
-require "db.php";
-require_once 'sessionStart.php';
+require "../db.php";
+require_once '../sessionStart.php';
 $sql = 'SELECT name FROM files WHERE id=:id and userID=:userID';
 $sth = $db->prepare ($sql);
 $sth->bindParam (':id', $_GET['id']);
