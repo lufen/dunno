@@ -1,5 +1,6 @@
 // Get the list of files inside a folder
 function getFilesInFolder(id){
+	$('#FilesInFolder').load('fileStorage/table.html');
 	$.ajax({
 		async:true,
 		url: 'fileStorage/getFilesInFolder.php',
@@ -9,10 +10,11 @@ function getFilesInFolder(id){
 		success: function (tmp) {
 			var jsonData = jQuery.parseJSON(tmp);
 			$.each(jsonData, function (index, value) {
-				link = '<a href="fileStorage/downloadFile.php?id='+value["id"]+'">Download</a>';
-				publish = '<a href="javascript:publishFileDialog('+value['id']+');">Publish</a>';
+				link = '<button onclick="fileStorage/downloadFile.php?id='+value["id"]+'">Download</button>';
+				publish = '<button onclick="javascript:publishFileDialog('+value['id']+');">Publish</button>';
 
 				var row = $('<tr><td>'+value['name']+'</td><td>'+value['mime']+'</td><td>'+value['size']+'</td><td>'+link+'</td><td>'+publish+'</td></tr>');
+			 	
 			 	$('#fs-table').append(row);
 			});
 

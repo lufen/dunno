@@ -29,8 +29,7 @@ function convertPlainTextToEncrypted($password,$uid){
 function registerUser($email, $password){
 	require "../db.php";
 	require_once '../sessionStart.php';
-	$db->beginTransaction();
-	$db->query('LOCK TABLES users WRITE');
+	
 	// Add user, then read back and update it with the encrypted one.
 	$sql = 'INSERT INTO users (email, password)VALUES (:email, :password)';
 	$sth = $db->prepare ($sql);
@@ -38,10 +37,8 @@ function registerUser($email, $password){
 	$sth->bindValue (':password',"hei");
 	$sth->execute ();
 	if($sth->rowCount() == 0){
-		// In case of error, rollback
-		$db->rollBack();                     
-		$db->query ('UNLOCK TABLES'); 
-		echo json_encode (array ('message'=>'Email not unique'));
+		echo json_encode (array ('message'=>'Email not unique','ok' => 'NOTOK'));
+		exit();
 	}
 	$uid = $db->lastInsertId();
 	// Update users password to an encrypted one
@@ -51,11 +48,9 @@ function registerUser($email, $password){
 	$sth->bindValue (':id',$uid);
 	$sth->execute ();
 	if ($sth->rowCount()==0) {                      
-		$db->rollBack();                      
-		$db->query('UNLOCK TABLES');
-		echo json_encode (array ('message'=>'Error happened'));
+		echo json_encode (array ('message'=>'Error happened', 'ok' => 'NOTOK'));
+		exit();
 	}
-	$db->commit();
 	echo json_encode (array ('ok'=>'OK'));
 }
 

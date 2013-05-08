@@ -78,6 +78,29 @@ function AmILoggedIn() {
 	});
 };
 
+function updateInfo(form){
+	if (form.email.value!=form.confirmation.value) {
+		alert ("E-mail addresses has to match");
+		form.pwd.focus();
+	}
+	$.ajax({
+		async:true,
+		url: 'userHandling/updateInformation.php',
+		type: 'get',
+		data: {'email': form.email.value},
+		success: function (tmp) {
+			data = eval ('('+tmp+')');
+			if (data.ok = 'OK'){
+				alert ("E-mail address changed");
+			} else {
+				alert (data.message);
+			}
+		}
+	})
+	$('#changeEmail').dialog('close');
+}
+
+
 // Dialogs
 function newUserDialog () {
 	// Show the new user dialog.	
@@ -114,3 +137,21 @@ function loginDialog () {
 		]
       }).dialog("open");
 }
+
+function changeInfoDialog () {
+	$("#changeEmail").dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: [
+			{
+				text: "Close",
+				click: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		]
+	}).dialog("open");
+}
+
